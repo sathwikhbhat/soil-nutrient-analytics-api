@@ -1,0 +1,52 @@
+package com.sathwikhbhat.soilanalytics.controller;
+
+import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
+import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
+import com.sathwikhbhat.soilanalytics.service.SoilRecordService;
+import jakarta.validation.Valid;
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/soil-records")
+public class SoilRecordController {
+
+    private final SoilRecordService soilRecordService;
+
+    public SoilRecordController(SoilRecordService soilRecordService) {
+        this.soilRecordService = soilRecordService;
+    }
+
+    @PostMapping
+    public ResponseEntity<SoilRecordResponse> createSoilRecord(@Valid @RequestBody SoilRecordRequest request) {
+        SoilRecordResponse response = soilRecordService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SoilRecordResponse>> getAllSoilRecords() {
+        List<SoilRecordResponse> responses = soilRecordService.getAll();
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SoilRecordResponse> getSoilRecordById(@PathVariable String id) {
+        SoilRecordResponse response = soilRecordService.getById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SoilRecordResponse> updateSoilRecord(
+            @PathVariable String id, @Valid @RequestBody SoilRecordRequest request) {
+        SoilRecordResponse response = soilRecordService.update(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSoilRecord(@PathVariable String id) {
+        soilRecordService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
