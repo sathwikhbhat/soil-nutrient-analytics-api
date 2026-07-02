@@ -2,21 +2,25 @@ package com.sathwikhbhat.soilanalytics.controller;
 
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
+import com.sathwikhbhat.soilanalytics.service.FileParserService;
 import com.sathwikhbhat.soilanalytics.service.SoilRecordService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/soil-records")
 public class SoilRecordController {
 
     private final SoilRecordService soilRecordService;
+    private final FileParserService fileParserService;
 
-    public SoilRecordController(SoilRecordService soilRecordService) {
+    public SoilRecordController(SoilRecordService soilRecordService, FileParserService fileParserService) {
         this.soilRecordService = soilRecordService;
+        this.fileParserService = fileParserService;
     }
 
     @PostMapping
@@ -48,5 +52,11 @@ public class SoilRecordController {
     public ResponseEntity<Void> deleteSoilRecord(@PathVariable String id) {
         soilRecordService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file) {
+        fileParserService.importFile(file);
+        return ResponseEntity.ok("File uploaded and processed successfully.");
     }
 }
