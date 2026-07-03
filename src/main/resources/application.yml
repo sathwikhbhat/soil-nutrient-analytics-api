@@ -9,3 +9,52 @@ spring:
 
 app:
   timezone: Asia/Kolkata
+
+nutrient-classification:
+  ph:
+    LOW: 6.5
+    MEDIUM: 7.5
+
+  ec:
+    LOW: 0.8
+    MEDIUM: 2.0
+
+  organic-carbon:
+    LOW: 0.50
+    MEDIUM: 0.75
+
+  nitrogen:
+    LOW: 280
+    MEDIUM: 560
+
+  phosphorus:
+    LOW: 10
+    MEDIUM: 25
+
+  potassium:
+    LOW: 120
+    MEDIUM: 280
+
+  sulfur:
+    LOW: 10
+    MEDIUM: 20
+
+  zinc:
+    LOW: 0.6
+    MEDIUM: 1.2
+
+  boron:
+    LOW: 0.5
+    MEDIUM: 1.0
+
+  iron:
+    LOW: 4.5
+    MEDIUM: 9.0
+
+  copper:
+    LOW: 0.2
+    MEDIUM: 0.4
+
+  manganese:
+    LOW: 2.0
+    MEDIUM: 4.0
