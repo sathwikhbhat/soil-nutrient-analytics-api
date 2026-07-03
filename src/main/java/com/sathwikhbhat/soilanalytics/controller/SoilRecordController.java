@@ -1,5 +1,6 @@
 package com.sathwikhbhat.soilanalytics.controller;
 
+import com.sathwikhbhat.soilanalytics.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
 import com.sathwikhbhat.soilanalytics.service.FileParserService;
@@ -58,5 +59,11 @@ public class SoilRecordController {
     public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file) {
         fileParserService.importFile(file);
         return ResponseEntity.ok("File uploaded and processed successfully.");
+    }
+
+    @GetMapping("/{id}/classification")
+    public ResponseEntity<NutrientClassificationResponse> getNutrientClassification(@PathVariable String id) {
+        NutrientClassificationResponse nutrientClassificationResponse = soilRecordService.getNutrientClassification(id);
+        return ResponseEntity.ok(nutrientClassificationResponse);
     }
 }

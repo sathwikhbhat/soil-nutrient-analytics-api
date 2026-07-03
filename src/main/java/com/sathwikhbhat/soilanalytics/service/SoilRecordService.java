@@ -1,5 +1,7 @@
 package com.sathwikhbhat.soilanalytics.service;
 
+import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
+import com.sathwikhbhat.soilanalytics.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
@@ -16,12 +18,14 @@ import org.springframework.stereotype.Service;
 public class SoilRecordService {
 
     private final SoilRecordRepository soilRecordRepository;
+    private final ClassificationService classificationService;
 
     @Value("${app.timezone}")
     private String timezone;
 
-    public SoilRecordService(SoilRecordRepository soilRecordRepository) {
+    public SoilRecordService(SoilRecordRepository soilRecordRepository, ClassificationService classificationService) {
         this.soilRecordRepository = soilRecordRepository;
+        this.classificationService = classificationService;
     }
 
     public SoilRecordResponse create(SoilRecordRequest request) {
@@ -63,5 +67,12 @@ public class SoilRecordService {
 
     public void delete(String id) {
         soilRecordRepository.deleteById(id);
+    }
+
+    public NutrientClassificationResponse getNutrientClassification(String id) {
+        SoilRecord soilRecord = soilRecordRepository
+                .findById(id)
+                .orElseThrow(() -> new SoilRecordNotFoundException("Soil record not found with id: " + id));
+        return classificationService.classify(soilRecord.getNutrients());
     }
 }
