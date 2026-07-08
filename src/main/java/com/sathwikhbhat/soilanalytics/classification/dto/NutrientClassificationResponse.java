@@ -1,4 +1,4 @@
-package com.sathwikhbhat.soilanalytics.dto;
+package com.sathwikhbhat.soilanalytics.classification.dto;
 
 import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 

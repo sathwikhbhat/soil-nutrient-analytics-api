@@ -1,6 +1,6 @@
 package com.sathwikhbhat.soilanalytics.classification;
 
-import com.sathwikhbhat.soilanalytics.dto.NutrientClassificationResponse;
+import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.entity.NutrientData;
 import org.springframework.stereotype.Service;
 

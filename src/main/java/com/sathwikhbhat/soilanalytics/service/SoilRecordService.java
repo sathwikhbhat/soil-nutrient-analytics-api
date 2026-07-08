@@ -1,7 +1,7 @@
 package com.sathwikhbhat.soilanalytics.service;
 
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
-import com.sathwikhbhat.soilanalytics.dto.NutrientClassificationResponse;
+import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;

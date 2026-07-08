@@ -1,6 +1,6 @@
 package com.sathwikhbhat.soilanalytics.controller;
 
-import com.sathwikhbhat.soilanalytics.dto.NutrientClassificationResponse;
+import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
 import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
 import com.sathwikhbhat.soilanalytics.service.FileParserService;
