@@ -42,6 +42,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
+    @ExceptionHandler(InvalidTrendTypeException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTrendTypeException(InvalidTrendTypeException e) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now(ZoneId.of(timezone)), null);
+
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();

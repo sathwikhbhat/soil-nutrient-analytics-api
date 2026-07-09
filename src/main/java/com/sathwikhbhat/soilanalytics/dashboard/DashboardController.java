@@ -1,12 +1,11 @@
 package com.sathwikhbhat.soilanalytics.dashboard;
 
-import com.sathwikhbhat.soilanalytics.dashboard.dto.AverageNutrientsResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
+import com.sathwikhbhat.soilanalytics.dashboard.dto.*;
+import com.sathwikhbhat.soilanalytics.exception.InvalidTrendTypeException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,5 +37,19 @@ public class DashboardController {
     @GetMapping("/average-nutrients")
     public ResponseEntity<AverageNutrientsResponse> getAverageNutrients() {
         return ResponseEntity.ok(dashboardService.getAverageNutrients());
+    }
+
+    @GetMapping("/trends")
+    public ResponseEntity<TrendResponse> getTrends(@RequestParam String type) {
+        TrendType trendType = parseTrendType(type);
+        return ResponseEntity.ok(dashboardService.getTrends(trendType));
+    }
+
+    private TrendType parseTrendType(String type) {
+        try {
+            return TrendType.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new InvalidTrendTypeException(type);
+        }
     }
 }

@@ -3,17 +3,13 @@ package com.sathwikhbhat.soilanalytics.dashboard;
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
 import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.AverageNutrientsResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
+import com.sathwikhbhat.soilanalytics.dashboard.dto.*;
 import com.sathwikhbhat.soilanalytics.entity.NutrientData;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -80,6 +76,53 @@ public class DashboardService {
         return new AverageNutrientsResponse(averageNutrients);
     }
 
+    public TrendResponse getTrends(TrendType type) {
+        List<SoilRecord> soilRecords = soilRecordRepository.findAll();
+
+        if (soilRecords.isEmpty()) {
+            return new TrendResponse(new HashMap<>());
+        }
+
+        Map<String, TrendAccumulator> groupedData = new HashMap<>();
+
+        for (SoilRecord record : soilRecords) {
+            String key = getTrendKey(record.getTestDate(), type);
+
+            groupedData.computeIfAbsent(key, k -> new TrendAccumulator()).add(record.getNutrients());
+        }
+
+        Map<String, Map<String, Double>> trends = new LinkedHashMap<>();
+
+        for (var entry : groupedData.entrySet()) {
+            trends.put(entry.getKey(), entry.getValue().getAverages());
+        }
+
+        return new TrendResponse(trends);
+    }
+
+    private String getTrendKey(LocalDate date, TrendType type) {
+        return switch (type) {
+            case MONTHLY -> YearMonth.from(date).toString();
+            case YEARLY -> String.valueOf(date.getYear());
+            case SEASONAL -> getSeason(date);
+        };
+    }
+
+    private String getSeason(LocalDate date) {
+        int month = date.getMonthValue();
+
+        String season =
+                switch (month) {
+                    case 12, 1, 2 -> "WINTER";
+                    case 3, 4, 5 -> "SUMMER";
+                    case 6, 7, 8, 9 -> "MONSOON";
+                    case 10, 11 -> "POST_MONSOON";
+                    default -> throw new IllegalStateException("Unexpected month: " + month);
+                };
+
+        return season + " " + date.getYear();
+    }
+
     private Map<String, Map<NutrientLevel, Integer>> buildNutrientDistribution() {
         Map<String, Map<NutrientLevel, Integer>> distribution = new HashMap<>();
 
@@ -135,5 +178,38 @@ public class DashboardService {
         distribution
                 .computeIfAbsent(nutrient, k -> new EnumMap<>(NutrientLevel.class))
                 .merge(level, 1, Integer::sum);
+    }
+
+    private static class TrendAccumulator {
+
+        private final Map<String, Double> sums = new HashMap<>();
+        private int count;
+
+        void add(NutrientData nutrients) {
+            merge("ph", nutrients.ph());
+            merge("ec", nutrients.ec());
+            merge("organicCarbon", nutrients.organicCarbon());
+            merge("nitrogen", nutrients.nitrogen());
+            merge("phosphorus", nutrients.phosphorus());
+            merge("potassium", nutrients.potassium());
+            merge("sulfur", nutrients.sulfur());
+            merge("zinc", nutrients.zinc());
+            merge("boron", nutrients.boron());
+            merge("iron", nutrients.iron());
+            merge("copper", nutrients.copper());
+            merge("manganese", nutrients.manganese());
+
+            count++;
+        }
+
+        Map<String, Double> getAverages() {
+            Map<String, Double> averages = new HashMap<>(sums);
+            averages.replaceAll((k, v) -> v / count);
+            return averages;
+        }
+
+        private void merge(String nutrient, double value) {
+            sums.merge(nutrient, value, Double::sum);
+        }
     }
 }
