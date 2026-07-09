@@ -1,6 +1,7 @@
 spring:
   application:
     name: Soil Nutrient Analytics API
+    version: 1.0.0
 
   mvc:
     servlet:
