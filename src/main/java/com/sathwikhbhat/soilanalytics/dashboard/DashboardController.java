@@ -1,6 +1,7 @@
 package com.sathwikhbhat.soilanalytics.dashboard;
 
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
+import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,10 @@ public class DashboardController {
     @GetMapping("/nutrient-distribution")
     public ResponseEntity<NutrientDistributionResponse> getNutrientDistribution() {
         return ResponseEntity.ok(dashboardService.getNutrientDistribution());
+    }
+
+    @GetMapping("/deficiency-percentage")
+    public ResponseEntity<DeficiencyPercentageResponse> getDeficiencyPercentage() {
+        return ResponseEntity.ok(dashboardService.getDeficiencyPercentage());
     }
 }

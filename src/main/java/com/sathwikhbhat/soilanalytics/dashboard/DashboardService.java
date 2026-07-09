@@ -4,6 +4,7 @@ import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
 import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
+import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
@@ -37,6 +38,30 @@ public class DashboardService {
     }
 
     public NutrientDistributionResponse getNutrientDistribution() {
+        return new NutrientDistributionResponse(buildNutrientDistribution());
+    }
+
+    public DeficiencyPercentageResponse getDeficiencyPercentage() {
+        Map<String, Map<NutrientLevel, Integer>> distribution = buildNutrientDistribution();
+        long totalSamples = soilRecordRepository.count();
+
+        Map<String, Double> deficiencyPercentage = new HashMap<>();
+
+        if (totalSamples == 0) {
+            return new DeficiencyPercentageResponse(deficiencyPercentage);
+        }
+
+        for (var entry : distribution.entrySet()) {
+            int lowCount = entry.getValue().getOrDefault(NutrientLevel.LOW, 0);
+            double percentage = (lowCount * 100.0) / totalSamples;
+
+            deficiencyPercentage.put(entry.getKey(), percentage);
+        }
+
+        return new DeficiencyPercentageResponse(deficiencyPercentage);
+    }
+
+    private Map<String, Map<NutrientLevel, Integer>> buildNutrientDistribution() {
         Map<String, Map<NutrientLevel, Integer>> distribution = new HashMap<>();
 
         List<SoilRecord> soilRecords = soilRecordRepository.findAll();
@@ -58,7 +83,7 @@ public class DashboardService {
             merge(distribution, "manganese", nutrientData.manganese());
         }
 
-        return new NutrientDistributionResponse(distribution);
+        return distribution;
     }
 
     private void merge(Map<String, Map<NutrientLevel, Integer>> distribution, String nutrient, NutrientLevel level) {
