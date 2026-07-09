@@ -3,9 +3,11 @@ package com.sathwikhbhat.soilanalytics.dashboard;
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
 import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
+import com.sathwikhbhat.soilanalytics.dashboard.dto.AverageNutrientsResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
+import com.sathwikhbhat.soilanalytics.entity.NutrientData;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
 import java.util.EnumMap;
@@ -59,6 +61,43 @@ public class DashboardService {
         }
 
         return new DeficiencyPercentageResponse(deficiencyPercentage);
+    }
+
+    public AverageNutrientsResponse getAverageNutrients() {
+        List<SoilRecord> soilRecords = soilRecordRepository.findAll();
+
+        if (soilRecords.isEmpty()) {
+            return new AverageNutrientsResponse(new HashMap<>());
+        }
+
+        Map<String, Double> averageNutrients = new HashMap<>();
+
+        for (SoilRecord records : soilRecords) {
+            NutrientData nutrients = records.getNutrients();
+
+            merge(averageNutrients, "ph", nutrients.ph());
+            merge(averageNutrients, "ec", nutrients.ec());
+            merge(averageNutrients, "organicCarbon", nutrients.organicCarbon());
+            merge(averageNutrients, "nitrogen", nutrients.nitrogen());
+            merge(averageNutrients, "phosphorus", nutrients.phosphorus());
+            merge(averageNutrients, "potassium", nutrients.potassium());
+            merge(averageNutrients, "sulfur", nutrients.sulfur());
+            merge(averageNutrients, "zinc", nutrients.zinc());
+            merge(averageNutrients, "boron", nutrients.boron());
+            merge(averageNutrients, "iron", nutrients.iron());
+            merge(averageNutrients, "copper", nutrients.copper());
+            merge(averageNutrients, "manganese", nutrients.manganese());
+        }
+
+        int totalSamples = soilRecords.size();
+
+        averageNutrients.replaceAll((nutrient, sum) -> sum / totalSamples);
+
+        return new AverageNutrientsResponse(averageNutrients);
+    }
+
+    private void merge(Map<String, Double> averageNutrients, String nutrient, double value) {
+        averageNutrients.merge(nutrient, value, Double::sum);
     }
 
     private Map<String, Map<NutrientLevel, Integer>> buildNutrientDistribution() {

@@ -1,5 +1,6 @@
 package com.sathwikhbhat.soilanalytics.dashboard;
 
+import com.sathwikhbhat.soilanalytics.dashboard.dto.AverageNutrientsResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
@@ -32,5 +33,10 @@ public class DashboardController {
     @GetMapping("/deficiency-percentage")
     public ResponseEntity<DeficiencyPercentageResponse> getDeficiencyPercentage() {
         return ResponseEntity.ok(dashboardService.getDeficiencyPercentage());
+    }
+
+    @GetMapping("/average-nutrients")
+    public ResponseEntity<AverageNutrientsResponse> getAverageNutrients() {
+        return ResponseEntity.ok(dashboardService.getAverageNutrients());
     }
 }
