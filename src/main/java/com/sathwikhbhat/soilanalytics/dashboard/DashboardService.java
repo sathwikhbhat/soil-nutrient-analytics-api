@@ -45,19 +45,18 @@ public class DashboardService {
 
     public DeficiencyPercentageResponse getDeficiencyPercentage() {
         Map<String, Map<NutrientLevel, Integer>> distribution = buildNutrientDistribution();
+
         long totalSamples = soilRecordRepository.count();
+
+        if (totalSamples == 0) {
+            return new DeficiencyPercentageResponse(new HashMap<>());
+        }
 
         Map<String, Double> deficiencyPercentage = new HashMap<>();
 
-        if (totalSamples == 0) {
-            return new DeficiencyPercentageResponse(deficiencyPercentage);
-        }
-
         for (var entry : distribution.entrySet()) {
             int lowCount = entry.getValue().getOrDefault(NutrientLevel.LOW, 0);
-            double percentage = (lowCount * 100.0) / totalSamples;
-
-            deficiencyPercentage.put(entry.getKey(), percentage);
+            deficiencyPercentage.put(entry.getKey(), (lowCount * 100.0) / totalSamples);
         }
 
         return new DeficiencyPercentageResponse(deficiencyPercentage);
@@ -72,32 +71,13 @@ public class DashboardService {
 
         Map<String, Double> averageNutrients = new HashMap<>();
 
-        for (SoilRecord records : soilRecords) {
-            NutrientData nutrients = records.getNutrients();
-
-            merge(averageNutrients, "ph", nutrients.ph());
-            merge(averageNutrients, "ec", nutrients.ec());
-            merge(averageNutrients, "organicCarbon", nutrients.organicCarbon());
-            merge(averageNutrients, "nitrogen", nutrients.nitrogen());
-            merge(averageNutrients, "phosphorus", nutrients.phosphorus());
-            merge(averageNutrients, "potassium", nutrients.potassium());
-            merge(averageNutrients, "sulfur", nutrients.sulfur());
-            merge(averageNutrients, "zinc", nutrients.zinc());
-            merge(averageNutrients, "boron", nutrients.boron());
-            merge(averageNutrients, "iron", nutrients.iron());
-            merge(averageNutrients, "copper", nutrients.copper());
-            merge(averageNutrients, "manganese", nutrients.manganese());
+        for (SoilRecord record : soilRecords) {
+            accumulateAverageNutrients(averageNutrients, record.getNutrients());
         }
 
-        int totalSamples = soilRecords.size();
-
-        averageNutrients.replaceAll((nutrient, sum) -> sum / totalSamples);
+        averageNutrients.replaceAll((nutrient, sum) -> sum / soilRecords.size());
 
         return new AverageNutrientsResponse(averageNutrients);
-    }
-
-    private void merge(Map<String, Double> averageNutrients, String nutrient, double value) {
-        averageNutrients.merge(nutrient, value, Double::sum);
     }
 
     private Map<String, Map<NutrientLevel, Integer>> buildNutrientDistribution() {
@@ -105,24 +85,50 @@ public class DashboardService {
 
         List<SoilRecord> soilRecords = soilRecordRepository.findAll();
 
-        for (SoilRecord records : soilRecords) {
-            NutrientClassificationResponse nutrientData = classificationService.classify(records.getNutrients());
+        for (SoilRecord record : soilRecords) {
+            NutrientClassificationResponse classification = classificationService.classify(record.getNutrients());
 
-            merge(distribution, "ph", nutrientData.ph());
-            merge(distribution, "ec", nutrientData.ec());
-            merge(distribution, "organicCarbon", nutrientData.organicCarbon());
-            merge(distribution, "nitrogen", nutrientData.nitrogen());
-            merge(distribution, "phosphorus", nutrientData.phosphorus());
-            merge(distribution, "potassium", nutrientData.potassium());
-            merge(distribution, "sulfur", nutrientData.sulfur());
-            merge(distribution, "zinc", nutrientData.zinc());
-            merge(distribution, "boron", nutrientData.boron());
-            merge(distribution, "iron", nutrientData.iron());
-            merge(distribution, "copper", nutrientData.copper());
-            merge(distribution, "manganese", nutrientData.manganese());
+            accumulateDistribution(distribution, classification);
         }
 
         return distribution;
+    }
+
+    private void accumulateAverageNutrients(Map<String, Double> averageNutrients, NutrientData nutrients) {
+
+        merge(averageNutrients, "ph", nutrients.ph());
+        merge(averageNutrients, "ec", nutrients.ec());
+        merge(averageNutrients, "organicCarbon", nutrients.organicCarbon());
+        merge(averageNutrients, "nitrogen", nutrients.nitrogen());
+        merge(averageNutrients, "phosphorus", nutrients.phosphorus());
+        merge(averageNutrients, "potassium", nutrients.potassium());
+        merge(averageNutrients, "sulfur", nutrients.sulfur());
+        merge(averageNutrients, "zinc", nutrients.zinc());
+        merge(averageNutrients, "boron", nutrients.boron());
+        merge(averageNutrients, "iron", nutrients.iron());
+        merge(averageNutrients, "copper", nutrients.copper());
+        merge(averageNutrients, "manganese", nutrients.manganese());
+    }
+
+    private void accumulateDistribution(
+            Map<String, Map<NutrientLevel, Integer>> distribution, NutrientClassificationResponse classification) {
+
+        merge(distribution, "ph", classification.ph());
+        merge(distribution, "ec", classification.ec());
+        merge(distribution, "organicCarbon", classification.organicCarbon());
+        merge(distribution, "nitrogen", classification.nitrogen());
+        merge(distribution, "phosphorus", classification.phosphorus());
+        merge(distribution, "potassium", classification.potassium());
+        merge(distribution, "sulfur", classification.sulfur());
+        merge(distribution, "zinc", classification.zinc());
+        merge(distribution, "boron", classification.boron());
+        merge(distribution, "iron", classification.iron());
+        merge(distribution, "copper", classification.copper());
+        merge(distribution, "manganese", classification.manganese());
+    }
+
+    private void merge(Map<String, Double> averageNutrients, String nutrient, double value) {
+        averageNutrients.merge(nutrient, value, Double::sum);
     }
 
     private void merge(Map<String, Map<NutrientLevel, Integer>> distribution, String nutrient, NutrientLevel level) {
