@@ -47,7 +47,9 @@ public class FileParserService {
                         csvRecord.get("state"),
                         csvRecord.get("district"),
                         csvRecord.get("taluk"),
-                        csvRecord.get("village"));
+                        csvRecord.get("village"),
+                        Double.parseDouble(csvRecord.get("latitude")),
+                        Double.parseDouble(csvRecord.get("longitude")));
 
                 NutrientData nutrients = new NutrientData(
                         Double.parseDouble(csvRecord.get("ph")),
