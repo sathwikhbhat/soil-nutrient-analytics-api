@@ -3,12 +3,12 @@ package com.sathwikhbhat.soilanalytics.map;
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.map.dto.MapFilterRequest;
 import com.sathwikhbhat.soilanalytics.map.dto.MapMarkerResponse;
+import com.sathwikhbhat.soilanalytics.mongo.MongoQueryUtils;
+import java.util.List;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MapService {
@@ -28,7 +28,7 @@ public class MapService {
     }
 
     private Query buildQuery(MapFilterRequest filters) {
-        Query query = new Query();
+        Query query = MongoQueryUtils.createQuery();
 
         if (filters.state() != null && !filters.state().isBlank()) {
             query.addCriteria(Criteria.where("location.state").is(filters.state()));
