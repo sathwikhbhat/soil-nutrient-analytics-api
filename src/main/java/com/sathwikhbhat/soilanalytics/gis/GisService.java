@@ -57,11 +57,6 @@ public class GisService {
         return new GisMarkerResponse(
                 record.getSampleId(),
                 record.getLocation().latitude(),
-                record.getLocation().longitude(),
-                record.getLocation().state(),
-                record.getLocation().district(),
-                record.getLocation().taluk(),
-                record.getLocation().village(),
-                record.getCrop());
+                record.getLocation().longitude());
     }
 }
