@@ -1,8 +1,8 @@
-package com.sathwikhbhat.soilanalytics.map;
+package com.sathwikhbhat.soilanalytics.gis;
 
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
-import com.sathwikhbhat.soilanalytics.map.dto.MapFilterRequest;
-import com.sathwikhbhat.soilanalytics.map.dto.MapMarkerResponse;
+import com.sathwikhbhat.soilanalytics.gis.dto.GisFilterRequest;
+import com.sathwikhbhat.soilanalytics.gis.dto.GisMarkerResponse;
 import com.sathwikhbhat.soilanalytics.mongo.MongoQueryUtils;
 import java.util.List;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,15 +11,15 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MapService {
+public class GisService {
 
     private final MongoTemplate mongoTemplate;
 
-    public MapService(MongoTemplate mongoTemplate) {
+    public GisService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public List<MapMarkerResponse> getMarkers(MapFilterRequest filters) {
+    public List<GisMarkerResponse> getMarkers(GisFilterRequest filters) {
         Query query = buildQuery(filters);
 
         List<SoilRecord> records = mongoTemplate.find(query, SoilRecord.class);
@@ -27,7 +27,7 @@ public class MapService {
         return records.stream().map(this::toMapMarkerResponse).toList();
     }
 
-    private Query buildQuery(MapFilterRequest filters) {
+    private Query buildQuery(GisFilterRequest filters) {
         Query query = MongoQueryUtils.createQuery();
 
         if (filters.state() != null && !filters.state().isBlank()) {
@@ -53,8 +53,8 @@ public class MapService {
         return query;
     }
 
-    private MapMarkerResponse toMapMarkerResponse(SoilRecord record) {
-        return new MapMarkerResponse(
+    private GisMarkerResponse toMapMarkerResponse(SoilRecord record) {
+        return new GisMarkerResponse(
                 record.getSampleId(),
                 record.getLocation().latitude(),
                 record.getLocation().longitude(),

@@ -1,6 +1,6 @@
-package com.sathwikhbhat.soilanalytics.map.dto;
+package com.sathwikhbhat.soilanalytics.gis.dto;
 
-public record MapMarkerResponse(
+public record GisMarkerResponse(
         String sampleId,
         double latitude,
         double longitude,
