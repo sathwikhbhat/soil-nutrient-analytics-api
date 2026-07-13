@@ -1,12 +1,14 @@
 package com.sathwikhbhat.soilanalytics.map;
 
 import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.map.dto.MapFilterRequest;
 import com.sathwikhbhat.soilanalytics.map.dto.MapMarkerResponse;
-import java.util.List;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MapService {
@@ -17,29 +19,38 @@ public class MapService {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public List<MapMarkerResponse> getMarkers(
-            String state, String district, String taluk, String village, String crop) {
-        Query query = new Query();
-
-        if (state != null && !state.isBlank()) {
-            query.addCriteria(Criteria.where("location.state").is(state));
-        }
-        if (district != null && !district.isBlank()) {
-            query.addCriteria(Criteria.where("location.district").is(district));
-        }
-        if (taluk != null && !taluk.isBlank()) {
-            query.addCriteria(Criteria.where("location.taluk").is(taluk));
-        }
-        if (village != null && !village.isBlank()) {
-            query.addCriteria(Criteria.where("location.village").is(village));
-        }
-        if (crop != null && !crop.isBlank()) {
-            query.addCriteria(Criteria.where("crop").is(crop));
-        }
+    public List<MapMarkerResponse> getMarkers(MapFilterRequest filters) {
+        Query query = buildQuery(filters);
 
         List<SoilRecord> records = mongoTemplate.find(query, SoilRecord.class);
 
         return records.stream().map(this::toMapMarkerResponse).toList();
+    }
+
+    private Query buildQuery(MapFilterRequest filters) {
+        Query query = new Query();
+
+        if (filters.state() != null && !filters.state().isBlank()) {
+            query.addCriteria(Criteria.where("location.state").is(filters.state()));
+        }
+
+        if (filters.district() != null && !filters.district().isBlank()) {
+            query.addCriteria(Criteria.where("location.district").is(filters.district()));
+        }
+
+        if (filters.taluk() != null && !filters.taluk().isBlank()) {
+            query.addCriteria(Criteria.where("location.taluk").is(filters.taluk()));
+        }
+
+        if (filters.village() != null && !filters.village().isBlank()) {
+            query.addCriteria(Criteria.where("location.village").is(filters.village()));
+        }
+
+        if (filters.crop() != null && !filters.crop().isBlank()) {
+            query.addCriteria(Criteria.where("crop").is(filters.crop()));
+        }
+
+        return query;
     }
 
     private MapMarkerResponse toMapMarkerResponse(SoilRecord record) {
