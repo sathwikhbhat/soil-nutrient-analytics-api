@@ -8,7 +8,7 @@ spring:
       path: /api/v1
 
   mongodb:
-    host: localhost
+    host: mongo
     port: 27017
     database: soil_nutrient_analytics
 
