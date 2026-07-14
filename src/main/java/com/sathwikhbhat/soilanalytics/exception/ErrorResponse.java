@@ -1,4 +1,4 @@
-package com.sathwikhbhat.soilanalytics.dto;
+package com.sathwikhbhat.soilanalytics.exception;
 
 import java.time.LocalDateTime;
 import java.util.Map;

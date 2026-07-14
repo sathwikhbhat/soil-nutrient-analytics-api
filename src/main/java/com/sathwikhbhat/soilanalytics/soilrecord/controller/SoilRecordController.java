@@ -1,10 +1,10 @@
-package com.sathwikhbhat.soilanalytics.controller;
+package com.sathwikhbhat.soilanalytics.soilrecord.controller;
 
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
-import com.sathwikhbhat.soilanalytics.service.FileParserService;
-import com.sathwikhbhat.soilanalytics.service.SoilRecordService;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordRequest;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordResponse;
+import com.sathwikhbhat.soilanalytics.soilrecord.service.FileParserService;
+import com.sathwikhbhat.soilanalytics.soilrecord.service.SoilRecordService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -56,7 +56,7 @@ public class SoilRecordController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam MultipartFile file) {
         fileParserService.importFile(file);
         return ResponseEntity.ok("File uploaded and processed successfully.");
     }

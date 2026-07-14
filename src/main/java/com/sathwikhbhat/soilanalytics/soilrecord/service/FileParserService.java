@@ -1,10 +1,10 @@
-package com.sathwikhbhat.soilanalytics.service;
+package com.sathwikhbhat.soilanalytics.soilrecord.service;
 
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
-import com.sathwikhbhat.soilanalytics.entity.Location;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
 import com.sathwikhbhat.soilanalytics.exception.FileProcessingException;
 import com.sathwikhbhat.soilanalytics.exception.UnsupportedFileTypeException;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordRequest;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.Location;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

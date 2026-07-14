@@ -1,8 +1,9 @@
-package com.sathwikhbhat.soilanalytics.gis;
+package com.sathwikhbhat.soilanalytics.gis.controller;
 
 import com.sathwikhbhat.soilanalytics.gis.dto.GisFilterRequest;
 import com.sathwikhbhat.soilanalytics.gis.dto.GisHeatMapResponse;
 import com.sathwikhbhat.soilanalytics.gis.dto.GisMarkerResponse;
+import com.sathwikhbhat.soilanalytics.gis.service.GisService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

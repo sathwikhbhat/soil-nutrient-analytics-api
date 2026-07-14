@@ -1,8 +1,8 @@
-package com.sathwikhbhat.soilanalytics.mapper;
+package com.sathwikhbhat.soilanalytics.soilrecord.mapper;
 
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordRequest;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordResponse;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
 
 public class SoilRecordMapper {
     private SoilRecordMapper() {

@@ -1,6 +1,7 @@
-package com.sathwikhbhat.soilanalytics.dashboard;
+package com.sathwikhbhat.soilanalytics.dashboard.controller;
 
 import com.sathwikhbhat.soilanalytics.dashboard.dto.*;
+import com.sathwikhbhat.soilanalytics.dashboard.service.DashboardService;
 import com.sathwikhbhat.soilanalytics.exception.InvalidTrendTypeException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

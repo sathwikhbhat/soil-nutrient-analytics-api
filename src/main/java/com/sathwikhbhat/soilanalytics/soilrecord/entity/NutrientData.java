@@ -1,4 +1,4 @@
-package com.sathwikhbhat.soilanalytics.entity;
+package com.sathwikhbhat.soilanalytics.soilrecord.entity;
 
 import jakarta.validation.constraints.NotNull;
 

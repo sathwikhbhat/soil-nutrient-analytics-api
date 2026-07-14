@@ -1,4 +1,4 @@
-package com.sathwikhbhat.soilanalytics.classification;
+package com.sathwikhbhat.soilanalytics.classification.model;
 
 public enum NutrientLevel {
     LOW,

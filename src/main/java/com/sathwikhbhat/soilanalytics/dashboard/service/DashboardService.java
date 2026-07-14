@@ -1,12 +1,13 @@
-package com.sathwikhbhat.soilanalytics.dashboard;
+package com.sathwikhbhat.soilanalytics.dashboard.service;
 
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
-import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.*;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
-import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
+import com.sathwikhbhat.soilanalytics.dashboard.repository.DashboardRepository;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.soilrecord.repository.SoilRecordRepository;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;

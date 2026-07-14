@@ -1,10 +1,10 @@
-package com.sathwikhbhat.soilanalytics.gis;
+package com.sathwikhbhat.soilanalytics.gis.service;
 
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.gis.dto.GisFilterRequest;
 import com.sathwikhbhat.soilanalytics.gis.dto.GisHeatMapResponse;
 import com.sathwikhbhat.soilanalytics.gis.dto.GisMarkerResponse;
 import com.sathwikhbhat.soilanalytics.mongo.MongoQueryUtils;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

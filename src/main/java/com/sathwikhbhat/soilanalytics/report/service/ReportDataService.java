@@ -1,20 +1,20 @@
 package com.sathwikhbhat.soilanalytics.report.service;
 
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
-import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.dashboard.DashboardService;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.AverageNutrientsResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DashboardOverviewResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.DeficiencyPercentageResponse;
 import com.sathwikhbhat.soilanalytics.dashboard.dto.NutrientDistributionResponse;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.dashboard.service.DashboardService;
 import com.sathwikhbhat.soilanalytics.report.dto.ReportData;
 import com.sathwikhbhat.soilanalytics.report.dto.ReportSection;
 import com.sathwikhbhat.soilanalytics.report.enums.ReportType;
 import com.sathwikhbhat.soilanalytics.report.util.NutrientFields;
-import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.soilrecord.repository.SoilRecordRepository;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;

@@ -1,7 +1,10 @@
 package com.sathwikhbhat.soilanalytics.classification;
 
+import com.sathwikhbhat.soilanalytics.classification.config.NutrientClassificationProperties;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientLevel;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientThreshold;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,8 +1,8 @@
 package com.sathwikhbhat.soilanalytics.report.util;
 
-import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientLevel;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
 import java.util.List;
 
 public final class NutrientFields {

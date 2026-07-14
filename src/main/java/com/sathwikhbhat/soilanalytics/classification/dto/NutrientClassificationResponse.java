@@ -1,6 +1,6 @@
 package com.sathwikhbhat.soilanalytics.classification.dto;
 
-import com.sathwikhbhat.soilanalytics.classification.NutrientLevel;
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientLevel;
 
 public record NutrientClassificationResponse(
         NutrientLevel ph,

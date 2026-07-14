@@ -1,5 +1,6 @@
-package com.sathwikhbhat.soilanalytics.classification;
+package com.sathwikhbhat.soilanalytics.classification.config;
 
+import com.sathwikhbhat.soilanalytics.classification.model.NutrientThreshold;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "nutrient-classification")

@@ -1,4 +1,4 @@
-package com.sathwikhbhat.soilanalytics.entity;
+package com.sathwikhbhat.soilanalytics.soilrecord.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

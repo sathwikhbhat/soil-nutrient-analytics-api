@@ -1,7 +1,7 @@
-package com.sathwikhbhat.soilanalytics.dto;
+package com.sathwikhbhat.soilanalytics.soilrecord.dto;
 
-import com.sathwikhbhat.soilanalytics.entity.Location;
-import com.sathwikhbhat.soilanalytics.entity.NutrientData;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.Location;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.NutrientData;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

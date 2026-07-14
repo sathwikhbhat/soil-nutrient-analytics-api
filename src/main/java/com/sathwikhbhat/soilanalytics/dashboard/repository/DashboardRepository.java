@@ -1,6 +1,6 @@
-package com.sathwikhbhat.soilanalytics.dashboard;
+package com.sathwikhbhat.soilanalytics.dashboard.repository;
 
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;

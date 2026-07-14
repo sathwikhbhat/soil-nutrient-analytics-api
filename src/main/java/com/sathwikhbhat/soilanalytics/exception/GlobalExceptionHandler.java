@@ -1,6 +1,5 @@
 package com.sathwikhbhat.soilanalytics.exception;
 
-import com.sathwikhbhat.soilanalytics.dto.ErrorResponse;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashMap;

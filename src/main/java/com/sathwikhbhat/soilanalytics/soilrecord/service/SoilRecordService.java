@@ -1,13 +1,13 @@
-package com.sathwikhbhat.soilanalytics.service;
+package com.sathwikhbhat.soilanalytics.soilrecord.service;
 
 import com.sathwikhbhat.soilanalytics.classification.ClassificationService;
 import com.sathwikhbhat.soilanalytics.classification.dto.NutrientClassificationResponse;
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordRequest;
-import com.sathwikhbhat.soilanalytics.dto.SoilRecordResponse;
-import com.sathwikhbhat.soilanalytics.entity.SoilRecord;
 import com.sathwikhbhat.soilanalytics.exception.SoilRecordNotFoundException;
-import com.sathwikhbhat.soilanalytics.mapper.SoilRecordMapper;
-import com.sathwikhbhat.soilanalytics.repository.SoilRecordRepository;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordRequest;
+import com.sathwikhbhat.soilanalytics.soilrecord.dto.SoilRecordResponse;
+import com.sathwikhbhat.soilanalytics.soilrecord.entity.SoilRecord;
+import com.sathwikhbhat.soilanalytics.soilrecord.mapper.SoilRecordMapper;
+import com.sathwikhbhat.soilanalytics.soilrecord.repository.SoilRecordRepository;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -30,7 +30,7 @@ public class SoilRecordService {
 
     public SoilRecordResponse create(SoilRecordRequest request) {
         SoilRecord soilRecord = SoilRecordMapper.toEntity(request);
-        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(timezone));
         soilRecord.setCreatedAt(now);
         soilRecord.setUpdatedAt(now);
 
@@ -59,7 +59,7 @@ public class SoilRecordService {
 
         updatedRecord.setId(id);
         updatedRecord.setCreatedAt(existingRecord.getCreatedAt());
-        updatedRecord.setUpdatedAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")));
+        updatedRecord.setUpdatedAt(LocalDateTime.now(ZoneId.of(timezone)));
 
         SoilRecord savedRecord = soilRecordRepository.save(updatedRecord);
         return SoilRecordMapper.toResponse(savedRecord);
