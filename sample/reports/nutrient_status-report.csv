@@ -1,0 +1,51 @@
+Overview,
+Metric,Value
+Total Samples,100
+District Coverage,5
+Crop Coverage,8
+
+Average Nutrients,
+Nutrient,Average
+ph,6.76
+ec,1.45
+organicCarbon,0.70
+nitrogen,424.81
+phosphorus,24.65
+potassium,257.55
+sulfur,20.59
+zinc,1.15
+boron,1.06
+iron,6.79
+copper,0.44
+manganese,3.50
+
+Nutrient Distribution,,,
+Nutrient,Low,Medium,High
+ph,43,34,23
+ec,27,45,28
+organicCarbon,32,16,52
+nitrogen,26,49,25
+phosphorus,19,29,52
+potassium,14,39,47
+sulfur,14,35,51
+zinc,13,41,46
+boron,16,28,56
+iron,27,48,25
+copper,16,30,54
+manganese,22,36,42
+
+Deficiency Percentage,
+Nutrient,Deficiency %
+ph,43.00%
+ec,27.00%
+organicCarbon,32.00%
+nitrogen,26.00%
+phosphorus,19.00%
+potassium,14.00%
+sulfur,14.00%
+zinc,13.00%
+boron,16.00%
+iron,27.00%
+copper,16.00%
+manganese,22.00%
+

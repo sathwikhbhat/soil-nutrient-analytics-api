@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "60a09b07-9761-4bfd-b125-1ee6d067d807",
+		"name": "Soil Nutrient Analytics API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41803345"
+	},
+	"item": [
+		{
+			"name": "Soil Records API",
+			"item": [
+				{
+					"name": "Get All Soil Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Soil Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sampleId\": \"S001\",\n    \"location\": {\n        \"state\": \"Karnataka\",\n        \"district\": \"Bengaluru East\",\n        \"taluk\": \"Bengaluru East\",\n        \"village\": \"Yelahanka\",\n        \"latitude\": 13.1007,\n        \"longitude\": 77.5963\n    },\n    \"crop\": \"Rice\",\n    \"testDate\": \"2025-01-13\",\n    \"nutrients\": {\n        \"ph\": 6.16,\n        \"ec\": 0.56,\n        \"organicCarbon\": 0.3,\n        \"nitrogen\": 678.0,\n        \"phosphorus\": 10.0,\n        \"potassium\": 382.0,\n        \"sulfur\": 18.0,\n        \"zinc\": 0.26,\n        \"boron\": 0.35,\n        \"iron\": 4.33,\n        \"copper\": 0.52,\n        \"manganese\": 3.81\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload CSV of Soil Records",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/sathwikhbhat/Downloads/soil_records.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records/upload",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Soil Record By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records/6a47a40a111d496b5167d4c3",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records",
+								"6a47a40a111d496b5167d4c3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Soil Record By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sampleId\": \"S001\",\n    \"location\": {\n        \"state\": \"Karnataka\",\n        \"district\": \"Bengaluru East\",\n        \"taluk\": \"Bengaluru East\",\n        \"village\": \"Yelahanka\",\n        \"latitude\": 13.1007,\n        \"longitude\": 77.5963\n    },\n    \"crop\": \"Rice\",\n    \"testDate\": \"2025-01-13\",\n    \"nutrients\": {\n        \"ph\": 6.16,\n        \"ec\": 0.56,\n        \"organicCarbon\": 0.3,\n        \"nitrogen\": 678.0,\n        \"phosphorus\": 10.0,\n        \"potassium\": 382.0,\n        \"sulfur\": 18.0,\n        \"zinc\": 0.26,\n        \"boron\": 0.35,\n        \"iron\": 4.33,\n        \"copper\": 0.52,\n        \"manganese\": 3.81\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records/6a47a40a111d496b5167d4c3",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records",
+								"6a47a40a111d496b5167d4c3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Soil Record By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records/6a5375acf0670c0a31c7f655",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records",
+								"6a5375acf0670c0a31c7f655"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Classification of Soil Record By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/soil-records/6a47a40a111d496b5167d4c0/classification",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"soil-records",
+								"6a47a40a111d496b5167d4c0",
+								"classification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard API",
+			"item": [
+				{
+					"name": "Get Overview",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/dashboard/overview",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"overview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nutrient Distribution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/dashboard/nutrient-distribution",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"nutrient-distribution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deficiency Percentage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/dashboard/deficiency-percentage",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"deficiency-percentage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Average Nutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/dashboard/average-nutrients",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"average-nutrients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trends",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/dashboard/trends?type=SEASONAL",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"trends"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "SEASONAL"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GIS API",
+			"item": [
+				{
+					"name": "Get Markers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sampleId\": \"S001\",\n    \"location\": {\n        \"state\": \"Karnataka\",\n        \"district\": \"Bengaluru East\",\n        \"taluk\": \"Bengaluru East\",\n        \"village\": \"Yelahanka\",\n        \"latitude\": 13.1007,\n        \"longitude\": 77.5963\n    },\n    \"crop\": \"Rice\",\n    \"testDate\": \"2025-01-13\",\n    \"nutrients\": {\n        \"ph\": 6.16,\n        \"ec\": 0.56,\n        \"organicCarbon\": 0.3,\n        \"nitrogen\": 678.0,\n        \"phosphorus\": 10.0,\n        \"potassium\": 382.0,\n        \"sulfur\": 18.0,\n        \"zinc\": 0.26,\n        \"boron\": 0.35,\n        \"iron\": 4.33,\n        \"copper\": 0.52,\n        \"manganese\": 3.81\n    }\n}"
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/gis/markers?crop=cotton",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gis",
+								"markers"
+							],
+							"query": [
+								{
+									"key": "crop",
+									"value": "cotton"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get HeatMaps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/gis/heatmap?crop=cotton",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gis",
+								"heatmap"
+							],
+							"query": [
+								{
+									"key": "crop",
+									"value": "cotton"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports API",
+			"item": [
+				{
+					"name": "Get Report of Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/reports?type=NUTRIENT_STATUS",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "NUTRIENT_STATUS"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{APP_URL}}/api/v1/health",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{APP_URL}}/api/v1/version",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{APP_URL}}/api/v1/info",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"info"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_URL",
+			"value": ""
+		}
+	]
+}

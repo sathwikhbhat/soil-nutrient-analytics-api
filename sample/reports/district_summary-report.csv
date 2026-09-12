@@ -1,0 +1,8 @@
+District Nutrient Summary,,,,,,,,,,,
+District,Sample Count,ph (avg),ph deficiency %,organicCarbon (avg),organicCarbon deficiency %,nitrogen (avg),nitrogen deficiency %,phosphorus (avg),phosphorus deficiency %,potassium (avg),potassium deficiency %
+Belagavi,22,6.71,40.91%,0.77,22.73%,436.09,22.73%,25.14,18.18%,285.05,9.09%
+Bengaluru Urban,24,6.71,41.67%,0.68,37.50%,444.04,29.17%,24.63,16.67%,239.17,16.67%
+Dharwad,21,6.85,42.86%,0.69,33.33%,421.43,19.05%,22.33,23.81%,239.10,19.05%
+Mysuru,19,6.81,42.11%,0.72,31.58%,430.95,21.05%,28.58,5.26%,248.63,10.53%
+Tumakuru,14,6.73,50.00%,0.65,35.71%,370.86,42.86%,22.07,35.71%,285.64,14.29%
+

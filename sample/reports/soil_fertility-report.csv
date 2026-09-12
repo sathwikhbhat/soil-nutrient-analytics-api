@@ -1,0 +1,30 @@
+Fertility Summary,
+Metric,Value
+Total Samples,100
+Low Fertility Samples,13
+Low Fertility Percentage,13.00%
+
+Fertility Indicator Averages,
+Nutrient,Average
+ph,6.76
+organicCarbon,0.70
+nitrogen,424.81
+phosphorus,24.65
+potassium,257.55
+
+Fertility Indicator Distribution,,,
+Nutrient,Low,Medium,High
+ph,43,34,23
+organicCarbon,32,16,52
+nitrogen,26,49,25
+phosphorus,19,29,52
+potassium,14,39,47
+
+Fertility Indicator Deficiency,
+Nutrient,Deficiency %
+ph,43.00%
+organicCarbon,32.00%
+nitrogen,26.00%
+phosphorus,19.00%
+potassium,14.00%
+
